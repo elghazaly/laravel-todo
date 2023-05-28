@@ -1,0 +1,82 @@
+﻿<h1>Create Task</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="mb-3 col-3">
+      <label class="form-label">Assigned By</label>
+      <select
+        formControlName="assigned_by_id"
+        class="form-select"
+        [ngClass]="{ 'is-invalid': submitted && f.assigned_by_id.errors }"
+      >
+        <option value=""></option>
+        <option *ngFor="let admin of admins" [value]="admin.id">
+          {{ admin.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="submitted && f.assigned_by_id.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="f.assigned_by_id.errors.required">
+          Assigned By is required
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 col-6">
+      <label class="form-label">Title</label>
+      <input
+        type="text"
+        formControlName="title"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+      />
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">Title is required</div>
+      </div>
+    </div>
+    <div class="mb-3 col-3">
+      <label class="form-label">Assigned To</label>
+      <select
+        formControlName="assigned_to_id"
+        class="form-select"
+        [ngClass]="{ 'is-invalid': submitted && f.assigned_to_id.errors }"
+      >
+        <option value=""></option>
+        <option *ngFor="let user of users" [value]="user.id">
+          {{ user.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="submitted && f.assigned_to_id.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="f.assigned_to_id.errors.required">
+          Assigned To is required
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea
+      rows="3"
+      formControlName="description"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+    ></textarea>
+    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+      <div *ngIf="f.description.errors.required">Description is required</div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <button type="submit" [disabled]="submitting" class="btn btn-primary me-2">
+      <span
+        *ngIf="submitting"
+        class="spinner-border spinner-border-sm me-1"
+      ></span>
+      Update
+    </button>
+    <a routerLink="../" href="" class="btn btn-link">Cancel</a>
+  </div>
+</form>

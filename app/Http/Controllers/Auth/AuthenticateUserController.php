@@ -60,8 +60,16 @@ class AuthenticateUserController extends Controller {
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function refresh() {
-        return $this->createNewToken(auth()->refresh());
+    public function refresh($guard = 'admin') {
+        return $this->createNewToken(auth($guard)->refresh());
+    }
+
+    public function refresh_admin() {
+        return $this->refresh('admin');
+    }
+
+    public function refresh_api() {
+        return $this->refresh('api');
     }
 
     /**
@@ -80,11 +88,12 @@ class AuthenticateUserController extends Controller {
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function createNewToken($token) {
+    protected function createNewToken($token, $guard = 'admin') {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth($guard)->factory()->getTTL() * 60,
+            'name' => auth($guard)->user()->name,
         ]);
     }
 }

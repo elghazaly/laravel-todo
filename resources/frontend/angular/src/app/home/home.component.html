@@ -1,0 +1,20 @@
+﻿<div class="p-4">
+  <div class="container">
+    <h1>Hi {{ account?.name }}!</h1>
+    <p>Statistics page</p>
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Task Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stat of statistics">
+          <td>{{ stat.user?.name }}</td>
+          <td>{{ stat.task_count }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

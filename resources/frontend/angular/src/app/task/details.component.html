@@ -1,0 +1,59 @@
+﻿<div class="p-4">
+  <div class="container">
+    <h1>Hi {{ account?.name }}!</h1>
+    <p>List of available tasks</p>
+    <p><a routerLink="create">Create Task</a></p>
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Task</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="list-unstyled" *ngFor="let task of tasks">
+          <td>
+            {{ task.title }}
+            <div class="text-muted">
+              Assigned to <b>{{ task.user?.name }}</b> by
+              <b>{{ task.admin?.name }}</b>
+            </div>
+          </td>
+          <td>
+            <span class="badge bg-secondary fs-6">{{
+              task.created_at | date : "dd/MM/YYYY hh:mm a"
+            }}</span>
+          </td>
+          <td>{{ task.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row justify-content-center">
+      <div class="col col-auto">
+        <div class="input-group">
+          <button
+            class="btn btn-outline-primary"
+            [disabled]="pagination.current_page === 1"
+            (click)="nextPage(-1)"
+          >
+            Previous
+          </button>
+          <div
+            class="d-flex px-2 border-top border-primary border-bottom justify-content-center align-items-center"
+          >
+            {{ pagination.current_page }} of {{ pagination.last_page }}
+          </div>
+          <button
+            class="btn btn-outline-primary"
+            [disabled]="pagination.current_page >= pagination.last_page"
+            (click)="nextPage()"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

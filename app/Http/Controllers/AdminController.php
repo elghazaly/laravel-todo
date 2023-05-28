@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller {
     /**
@@ -15,8 +16,18 @@ class AdminController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $admins = Admin::all(['id', 'name']);
+    public function index(Request $request) {
+        $search = $request->query('search');
+
+        $query = Admin::query();
+
+        // Apply the search criteria
+        if ($search) {
+            $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%");
+        }
+
+        $admins = $query->paginate(20, ['id', 'name', 'email']);
 
         return response()->json($admins);
     }

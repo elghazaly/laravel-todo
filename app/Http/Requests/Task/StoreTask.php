@@ -20,8 +20,8 @@ class StoreTask extends FormRequest {
     public function rules(): array {
         return [
             'assigned_by_id' => 'required|integer|exists:admins,id',
-            'title' => 'required|max:200',
-            'description' => 'required|max:1500',
+            'title' => 'required|string|min:3|max:200',
+            'description' => 'required|string|min:10|max:1500',
             'assigned_to_id' => 'required|integer|exists:users,id',
         ];
     }
