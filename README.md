@@ -40,3 +40,7 @@ The backend code is written in Laravel and located in the root directory.
 1. Run the `php artisan migrate` command to run the database migrations.
 2. Seed the database with sample data: `php artisan db:seed`.
 3. Access the application at `http://localhost:8000`.
+
+## Bugs
+
+- The user and admin dropdowns in the task creation form currently return a fixed number of records instead of providing a search functionality. This is a known limitation, and only a subset of users will be displayed in the dropdown. I am actively working on implementing a search functionality to allow for a more comprehensive user selection experience.
