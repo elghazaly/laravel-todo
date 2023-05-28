@@ -23,6 +23,10 @@ This is a Laravel and Angular project.
 - `pnpm run build --prefix=resources/frontend/angular`: Build the Angular app.
 - `php artisan serve`: Start the Laravel server.
 
+## Example Credentials
+- Email: admin@example.com
+- Password: password
+
 ## Frontend
 
 The frontend code is located in the `resources/frontend/angular` folder.

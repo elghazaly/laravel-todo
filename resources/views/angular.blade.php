@@ -1,7 +1,8 @@
 <!DOCTYPE html><html><head>
     <base href="/en/">
     <title>
-      Angular Todo App
+      Angular 15 Auth Boilerplate - Sign Up with Verification, Login and Forgot
+      Password
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,6 +18,6 @@
         <a href="https://elghazaly.me" target="_blank">Ahmad Elghazaly</a>
       </p>
     </div>
-  <script src="runtime.a7050552ea4027b8.js" type="module"></script><script src="polyfills.6e6b8429d9fbb08a.js" type="module"></script><script src="main.980613915b26e161.js" type="module"></script>
+  <script src="runtime.35b210f271c66550.js" type="module"></script><script src="polyfills.6e6b8429d9fbb08a.js" type="module"></script><script src="main.3257cff6b31af68c.js" type="module"></script>
 
 </body></html>

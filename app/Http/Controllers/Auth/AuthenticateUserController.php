@@ -22,8 +22,9 @@ class AuthenticateUserController extends Controller {
      */
     public function login(LoginRequest $request) {
         $request->authenticate();
-        $token = auth($request->get('guard'))->attempt($request->only('email', 'password'));
-        return $this->createNewToken($token);
+        $guard = $request->get('guard');
+        $token = auth($guard)->attempt($request->only('email', 'password'));
+        return $this->createNewToken($token, $guard);
     }
 
     /**

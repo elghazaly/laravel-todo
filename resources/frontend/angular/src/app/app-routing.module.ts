@@ -3,15 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home';
 import { AuthGuard } from './_helpers';
-import { Role } from './_models';
 
-const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
 const tasksModule = () => import('./task/task.module').then(x => x.TaskModule);
+const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'account', loadChildren: accountModule },
   { path: 'tasks', loadChildren: tasksModule, canActivate: [AuthGuard] },
-  { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
