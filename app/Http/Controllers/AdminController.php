@@ -18,6 +18,7 @@ class AdminController extends Controller {
      */
     public function index(Request $request) {
         $search = $request->query('search');
+        $per_page = $request->get('per_page', 500);
 
         $query = Admin::query();
 
@@ -27,7 +28,7 @@ class AdminController extends Controller {
                 ->orWhere('email', 'LIKE', "%$search%");
         }
 
-        $admins = $query->paginate(20, ['id', 'name', 'email']);
+        $admins = $query->paginate($per_page, ['id', 'name', 'email']);
 
         return response()->json($admins);
     }

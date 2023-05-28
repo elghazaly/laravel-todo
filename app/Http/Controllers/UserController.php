@@ -18,6 +18,7 @@ class UserController extends Controller {
      */
     public function index(Request $request) {
         $search = $request->query('search');
+        $per_page = $request->query('per_page', 500);
 
         $query = User::query();
 
@@ -27,7 +28,7 @@ class UserController extends Controller {
                 ->orWhere('email', 'LIKE', "%$search%");
         }
 
-        $users = $query->paginate(20, ['id', 'name', 'email']);
+        $users = $query->paginate($per_page, ['id', 'name', 'email']);
 
         return response()->json($users);
     }

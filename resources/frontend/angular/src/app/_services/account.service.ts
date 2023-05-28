@@ -91,8 +91,8 @@ export class AccountService {
     return this.http.get<Pagination>(`${baseUrl}/admins?page=${page}`);
   }
 
-  getAllUsers(page = 1) {
-    return this.http.get<Pagination>(`${baseUrl}/users?page=${page}`);
+  getAllUsers(search: string = '') {
+    return this.http.get<Pagination>(`${baseUrl}/users?search=${search}`);
   }
 
   getStatistics() {

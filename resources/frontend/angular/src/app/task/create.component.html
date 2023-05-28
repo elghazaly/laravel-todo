@@ -3,16 +3,11 @@
   <div class="row">
     <div class="mb-3 col-3">
       <label class="form-label">Assigned By</label>
-      <select
+      <ngx-select
+        [items]="admins"
         formControlName="assigned_by_id"
-        class="form-select"
-        [ngClass]="{ 'is-invalid': submitted && f.assigned_by_id.errors }"
-      >
-        <option value=""></option>
-        <option *ngFor="let admin of admins" [value]="admin.id">
-          {{ admin.name }}
-        </option>
-      </select>
+        optionTextField="name"
+      ></ngx-select>
       <div
         *ngIf="submitted && f.assigned_by_id.errors"
         class="invalid-feedback"
@@ -36,16 +31,11 @@
     </div>
     <div class="mb-3 col-3">
       <label class="form-label">Assigned To</label>
-      <select
+      <ngx-select
+        [items]="users"
         formControlName="assigned_to_id"
-        class="form-select"
-        [ngClass]="{ 'is-invalid': submitted && f.assigned_to_id.errors }"
-      >
-        <option value=""></option>
-        <option *ngFor="let user of users" [value]="user.id">
-          {{ user.name }}
-        </option>
-      </select>
+        optionTextField="name"
+      ></ngx-select>
       <div
         *ngIf="submitted && f.assigned_to_id.errors"
         class="invalid-feedback"
