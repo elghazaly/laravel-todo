@@ -6,7 +6,7 @@ import { TaskRoutingModule } from './task-routing.module';
 import { LayoutComponent } from './layout.component';
 import { DetailsComponent } from './details.component';
 import { CreateComponent } from './create.component';
-import { NgxSelectModule } from 'ngx-select-ex';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { NgxSelectModule } from 'ngx-select-ex';
     FormsModule,
     ReactiveFormsModule,
     TaskRoutingModule,
-    NgxSelectModule,
+    NgbTypeaheadModule,
   ],
   declarations: [
     LayoutComponent,

@@ -87,12 +87,12 @@ export class AccountService {
     return this.http.get<Pagination>(`${baseUrl}/tasks?page=${page}`);
   }
 
-  getAllAdmins(page = 1) {
-    return this.http.get<Pagination>(`${baseUrl}/admins?page=${page}`);
+  getAllAdmins(search: string = '', per_page = 10) {
+    return this.http.get<Pagination>(`${baseUrl}/admins?search=${search}&per_page=${per_page}`);
   }
 
-  getAllUsers(search: string = '') {
-    return this.http.get<Pagination>(`${baseUrl}/users?search=${search}`);
+  getAllUsers(search: string = '', per_page = 10) {
+    return this.http.get<Pagination>(`${baseUrl}/users?search=${search}&per_page=${per_page}`);
   }
 
   getStatistics() {

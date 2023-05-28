@@ -3,11 +3,14 @@
   <div class="row">
     <div class="mb-3 col-3">
       <label class="form-label">Assigned By</label>
-      <ngx-select
-        [items]="admins"
+      <input
+        type="text"
+        class="form-control"
         formControlName="assigned_by_id"
-        optionTextField="name"
-      ></ngx-select>
+        [ngbTypeahead]="search_admin"
+        [inputFormatter]="resultFormatter"
+        [resultFormatter]="resultFormatter"
+      />
       <div
         *ngIf="submitted && f.assigned_by_id.errors"
         class="invalid-feedback"
@@ -31,11 +34,14 @@
     </div>
     <div class="mb-3 col-3">
       <label class="form-label">Assigned To</label>
-      <ngx-select
-        [items]="users"
+      <input
+        type="text"
+        class="form-control"
         formControlName="assigned_to_id"
-        optionTextField="name"
-      ></ngx-select>
+        [ngbTypeahead]="search_user"
+        [inputFormatter]="resultFormatter"
+        [resultFormatter]="resultFormatter"
+      />
       <div
         *ngIf="submitted && f.assigned_to_id.errors"
         class="invalid-feedback"

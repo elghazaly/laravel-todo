@@ -1,11 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 import { AccountService, AlertService } from '@app/_services';
-import { Observable, OperatorFunction } from 'rxjs';
+import { Observable, OperatorFunction, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { INgxSelectOption } from 'ngx-select-ex';
+import { Pagination } from '@app/_models';
 
 @Component({ templateUrl: 'create.component.html' })
 export class CreateComponent implements OnInit {
@@ -38,6 +38,50 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  search_user = (text$: Observable<string>): Observable<any[]> => {
+    const searchSubject = new Subject<string>();
+
+    // Trigger search on each input change
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap(searchTerm => {
+        searchSubject.next(searchTerm);
+        return searchSubject;
+      })
+    ).subscribe();
+
+    return searchSubject.pipe(
+      switchMap(searchTerm =>
+        this.accountService.getAllUsers(searchTerm).pipe(map((pagination: Pagination) => pagination.data))
+      )
+    );
+  }
+
+  search_admin = (text$: Observable<string>): Observable<any[]> => {
+    const searchSubject = new Subject<string>();
+
+    // Trigger search on each input change
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap(searchTerm => {
+        searchSubject.next(searchTerm);
+        return searchSubject;
+      })
+    ).subscribe();
+
+    return searchSubject.pipe(
+      switchMap(searchTerm =>
+        this.accountService.getAllAdmins(searchTerm).pipe(map((pagination: Pagination) => pagination.data))
+      )
+    );
+  }
+
+  resultFormatter(item: any) {
+    return item.name
+  }
+
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
@@ -54,7 +98,11 @@ export class CreateComponent implements OnInit {
 
     // this.submitting = true;
     console.log(this.form.value)
-    this.accountService.createTask(this.form.value)
+    this.accountService.createTask({
+      ...this.form.value,
+      assigned_by_id: this.form.value.assigned_by_id?.id,
+      assigned_to_id: this.form.value.assigned_to_id?.id,
+    })
       .pipe(first())
       .subscribe({
         next: () => {
