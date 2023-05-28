@@ -39,6 +39,7 @@ class Admin extends Authenticatable implements JWTSubject {
      * @var array<string, string>
      */
     protected $casts = [
+        'id' => 'integer',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];

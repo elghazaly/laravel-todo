@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\User;
 
-class AdminController extends Controller {
+class UserController extends Controller {
     /**
      * Constructor
      */
@@ -16,8 +16,8 @@ class AdminController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $admins = Admin::all(['id', 'name']);
+        $users = User::all(['id', 'name']);
 
-        return response()->json($admins);
+        return response()->json($users);
     }
 }

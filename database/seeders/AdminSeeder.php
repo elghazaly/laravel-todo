@@ -13,8 +13,7 @@ class AdminSeeder extends Seeder {
      * Run the database seeds.
      */
     public function run(): void {
-        $count = 10000;
-        $chunkSize = 1000; // Number of users to create in each chunk
+        $count = 100;
 
         Admin::firstOrCreate(
             [
@@ -26,8 +25,7 @@ class AdminSeeder extends Seeder {
             ]
         );
 
-        Admin::factory()->count($count)->make()->chunk($chunkSize, function ($users) {
-            Admin::insert($users->toArray());
-        });
+        $this->command->info("Seeding $count admins...");
+        Admin::factory($count)->create();
     }
 }

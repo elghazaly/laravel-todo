@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,12 +10,10 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('statistics', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Admin::class, 'assigned_by_id');
-            $table->string('title');
-            $table->text('description');
-            $table->foreignIdFor(User::class, 'assigned_to_id');
+            $table->foreignIdFor(User::class, 'user_id');
+            $table->integer('task_count')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('statistics');
     }
 };
